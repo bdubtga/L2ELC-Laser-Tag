@@ -2,13 +2,18 @@
 #include <Wire.h>
 #include "RF24.h"
 #include "printf.h"
-#include <LiquidCrystal_I2C.h> // for the lcd
-RF24 ReceiveRadio (9, 10);
-LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
-
-
+#include <Servo.h>
 const int datanum = 12; //Number of data points in array.
 int data[datanum]; //Array to store data/
+RF24 ReceiveRadio (9, 10);
+int pin_pwma = 5;
+int pin_pwmb = 6;
+int pin_ain1 = 4;
+int pin_ain2 = 2;
+int pin_bin1 = 7;
+int pin_bin2 = 8;
+Servo servotilt;
+Servo servopan;
 
 void setup() {
   Serial.begin(115200); //Start serial monitor (115200 for RF Nano)
@@ -20,8 +25,22 @@ void setup() {
   ReceiveRadio.setPALevel(RF24_PA_MAX); //Max to provide maximum range
   ReceiveRadio.setDataRate(RF24_1MBPS) ;  //experiment with this to try get more range
   ReceiveRadio.startListening(); //Changes RF module to recieve mode
-  lcd.init(); // initialize the lcd
-  lcd.backlight();
+  pinMode(pin_pwma, OUTPUT);
+  pinMode(pin_pwmb, OUTPUT);
+  pinMode(pin_ain1, OUTPUT);
+  pinMode(pin_ain2, OUTPUT);
+  pinMode(pin_bin1, OUTPUT);
+  pinMode(pin_bin2, OUTPUT);
+  digitalWrite(pin_ain1, LOW);
+  digitalWrite(pin_ain2, LOW);
+  digitalWrite(pin_bin1, LOW);
+  digitalWrite(pin_bin2, LOW);
+  analogWrite(pin_pwma, 0);
+  analogWrite(pin_pwmb, 0);
+  servopan.attach(A4);
+  servotilt.attach(A5);
+  servopan.write(90);
+  servotilt.write(90);
 }
 
 void loop() {
@@ -29,31 +48,8 @@ void loop() {
     ReceiveRadio.read(data, datanum * sizeof(int));
     Serial.print(data[0]);
     Serial.print(" ");
-    Serial.print(data[1]);
-    Serial.print(" ");
-    Serial.print(data[2]);
-    Serial.print(" ");
-    Serial.print(data[3]);
-    Serial.print(" ");
-    Serial.print(data[4]);
-    Serial.print(" ");
-    Serial.print(data[5]);
-    Serial.print(" ");
-    Serial.print(data[6]);
-    Serial.print(" ");
-    Serial.print(data[7]);
-    Serial.print(" ");
-    Serial.print(data[8]);
-    Serial.print(" ");
-    Serial.print(data[9]);
-    Serial.print(" ");
-    Serial.print(data[10]);
-    Serial.print(" ");
-    Serial.print(data[11]);
-    Serial.println(" ");
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Mode: ");
-    lcd.print(data[9]);
+    Serial.println(data[1]);
+    servopan.write(180);
+    servotilt.write(180);
   }
 }

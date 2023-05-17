@@ -3,3 +3,7 @@
 - Had to swap A4 & A5 on pcb to match SCA & SCL for the lcd
 - running i2c scanner to find adress of lcd
 - when lcd is plugged in and joystickk all the way down it still shows 10 on joystick when when lcd unplugged it shows 0 (bug, somethigns bleeding over)
+##Saturday 13/5/2023
+- Added power button to Controller & Robot curcuit diagram
+-added shape of controller to controller PCB to maximise space
+- added hoels to controller pcb to it can be securly attached

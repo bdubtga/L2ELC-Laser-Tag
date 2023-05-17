@@ -17,6 +17,7 @@ const int BT3 = 6;
 const int SW1 = 5;
 const int SW2 = 4;
 const int SW3 = 3;
+const int LSR = 2;
 const int datanum = 12;
 int data[datanum];
 RF24 SendRadio(9, 10);
@@ -38,6 +39,7 @@ void setup()
   pinMode(SW1, INPUT_PULLUP);
   pinMode(SW2, INPUT_PULLUP);
   pinMode(SW3, INPUT_PULLUP);
+  pinMode(LSR, OUTPUT);
   SendRadio.begin(); //Start the nRF24L01+ module.
   SendRadio.setAddressWidth(5); //Set the address width to 5 bytes.
   SendRadio.openWritingPipe(0xF0F0F0F066LL); //Sends data on this 40-bit address
@@ -93,4 +95,9 @@ void loop()
   lcd.setCursor(0,0);
   lcd.print("Mode: ");
   lcd.print(data[9]);
+  if (data[9] == 0) {
+    digitalWrite(LSR, HIGH);
+  } else {
+    digitalWrite(LSR, LOW);
+  }
 }
