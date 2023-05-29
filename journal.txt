@@ -7,3 +7,8 @@
 - Added power button to Controller & Robot curcuit diagram
 -added shape of controller to controller PCB to maximise space
 - added hoels to controller pcb to it can be securly attached
+##Wednesday 17/5/2023
+- started designing the robot
+- designe & tested mount for yellow geared motors (used 3d printer)
+##Friday 26/5/2023
+- worked further on robot 3d model
