@@ -1,0 +1,5 @@
+{
+    "port": "/dev/tty.usbserial-21230",
+    "board": "nulllab avr compatible boards:avr:Nano",
+    "sketch": "test/servo/servo.ino"
+}

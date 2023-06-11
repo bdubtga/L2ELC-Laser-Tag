@@ -20,6 +20,10 @@ int pin_ain1 = 4;
 int pin_ain2 = 2;
 int pin_bin1 = 7;
 int pin_bin2 = 8;
+int pin_laser = A3;
+int pin_servotilt = A5;
+int pin_servopan = A4;
+
 Servo servotilt;
 Servo servopan;
 
@@ -45,19 +49,24 @@ void setup() {
   digitalWrite(pin_bin2, LOW);
   analogWrite(pin_pwma, 0);
   analogWrite(pin_pwmb, 0);
+  pinMode(pin_laser, OUTPUT);
   servopan.attach(A4);
   servotilt.attach(A5);
-  servopan.write(90);
-  servotilt.write(90);
+  servopan.write(1500);
+  servotilt.write(1500);
 }
 
 void loop() {
     if (ReceiveRadio.available()) {
     ReceiveRadio.read(data, datanum * sizeof(int));
-    Serial.print(data[0]);
-    Serial.print(" ");
-    Serial.println(data[1]);
-    servopan.write(180);
-    servotilt.write(180);
+    analogWrite(pin_pwma, data[0]);
+    digitalWrite(pin_ain1, data[1]);
+    digitalWrite(pin_ain2, data[2]);
+    analogWrite(pin_pwmb, data[3]);
+    digitalWrite(pin_bin1, data[4]);
+    digitalWrite(pin_bin2, data[5]);
+    digitalWrite(pin_laser, data[6]);
+    servotilt.write(data[7]);
+    servopan.write(data[8]);
   }
 }
