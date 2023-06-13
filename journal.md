@@ -45,3 +45,9 @@
 - Helped Ryan add headlights and brake lights to his vehicle.
 - Fixed the 3D printer again because Alex broke it.
 - Started printing Mr. Gilvear's chess project.
+
+### Thursday 13/6/2023
+- Started designing vehicle in Fusion 360.
+- Designed wheels.
+- Modelled arduino.
+- Modelled wheel but then decided to make custom wheels.
