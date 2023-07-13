@@ -51,3 +51,25 @@
 - Designed wheels.
 - Modelled arduino.
 - Modelled wheel but then decided to make custom wheels.
+### Friday 16/6/2023
+- Tested CNY70 with fresnel lens to mkae target bigger.
+- Got controller pcb
+### Tuesday 20/6/2023
+- Soldered arduino pins onto pcb
+- Soldered joystick onto pcb
+- Soldered LCD onto pcb
+- Soldered buttons onto pcb
+- Soldered battery connector onto pcb
+- Soldered power switch onto pcb
+- reprinted top peice with new holes & improved lcd mount mechanisim (new holes for power switch and power indicator led)
+### Friday 30/6/2023
+- Started swapping to new controller top peice
+- Started carbon fibre lcd mount with updated attachment
+- New top peice was printed bad and all tolerences are awful (wont fit) so I started reprinting it
+- thought about using mecanum wheels but decied it would be easier to use two wheels and a caster
+- ran every motor at full to see if there was enouh power
+- servos did not have enough power so I will add another voltager regulator
+- new new top peice is done and fits will assemble soon
+- printed Carbon fibre lcd mount with updated attachment
+- print done and fits in ebtter controller top perfect
+- HOLY SHIT THE POWER BUTTON HAS AN LED IN IT so im using the led I added as an extr aindicator not sure where im conecting it to yet EDIT; cancel that ima use that hole for laser for easy calibration of cny70
