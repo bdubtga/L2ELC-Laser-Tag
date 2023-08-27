@@ -73,3 +73,8 @@
 - printed Carbon fibre lcd mount with updated attachment
 - print done and fits in ebtter controller top perfect
 - HOLY SHIT THE POWER BUTTON HAS AN LED IN IT so im using the led I added as an extr aindicator not sure where im conecting it to yet EDIT; cancel that ima use that hole for laser for easy calibration of cny70
+
+### Wednesday 19/07/2023
+- Made mind map for planning standard
+- could use generative design in fusion 360 to create vehicle
+
