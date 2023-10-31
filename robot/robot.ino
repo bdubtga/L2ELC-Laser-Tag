@@ -59,14 +59,50 @@ void setup() {
 void loop() {
     if (ReceiveRadio.available()) {
     ReceiveRadio.read(data, datanum * sizeof(int));
-    analogWrite(pin_pwma, data[0]);
-    digitalWrite(pin_ain1, data[1]);
-    digitalWrite(pin_ain2, data[2]);
-    analogWrite(pin_pwmb, data[3]);
-    digitalWrite(pin_bin1, data[4]);
-    digitalWrite(pin_bin2, data[5]);
-    digitalWrite(pin_laser, data[6]);
-    servotilt.write(data[7]);
-    servopan.write(data[8]);
+    // j1
+    if (data[6] < 535) {
+      digitalWrite(pin_ain1, LOW); // Changed to LOW
+      digitalWrite(pin_ain2, HIGH); // Changed to HIGH
+      Serial.print("LOW, HIGH");
+      //fucntion to set speed 0-255
+      analogWrite(pin_pwma, map(data[6], 535, 1023, 0, 255));
+    } else if (data[6] > 535) {
+      digitalWrite(pin_ain1, HIGH); // Changed to HIGH
+      digitalWrite(pin_ain2, LOW); // Changed to LOW
+      Serial.print("HIGH, LOW");
+      //fucntion to set speed 0-255
+      analogWrite(pin_pwma, map(data[6], 0, 535, 255, 0));
+    }
+    else {
+      digitalWrite(pin_ain1, LOW); // Changed to LOW
+      digitalWrite(pin_ain2, LOW); // Changed to LOW
+      Serial.print("LOW, LOW");
+    }
+    // j2
+    if (data[9] < 521) {
+      digitalWrite(pin_bin1, LOW); // Changed to LOW
+      digitalWrite(pin_bin2, HIGH); // Changed to HIGH
+      Serial.print("LOW, HIGH");
+      //fucntion to set speed 0-255
+      analogWrite(pin_pwmb, map(data[9], 521, 1023, 0, 255));
+    } else if (data[9] > 521) {
+      digitalWrite(pin_bin1, HIGH); // Changed to HIGH
+      digitalWrite(pin_bin2, LOW); // Changed to LOW
+      Serial.print("HIGH, LOW");
+      //fucntion to set speed 0-255
+      analogWrite(pin_pwmb, map(data[9], 0, 521, 255, 0));
+    }
+    else {
+      digitalWrite(pin_bin1, LOW); // Changed to LOW
+      digitalWrite(pin_bin2, LOW); // Changed to LOW
+      Serial.print("LOW, LOW");
+    }
+    Serial.print(data[6]);
+    Serial.print("  ");
+    Serial.print(data[9]);
+    Serial.print("  ");
+    Serial.print(map(data[6], 535, 1023, 0, 255));
+    Serial.print("  ");
+    Serial.println(map(data[6], 0, 535, 255, 0));
   }
 }
