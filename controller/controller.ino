@@ -12,6 +12,7 @@
 #include <printf.h>
 #include <Wire.h> //`Wire.h` is a library that allows you to communicate with I2C devices.
 #include <LiquidCrystal_I2C.h> // for the lcd
+#include <EEPROM.h>
 int input;
 const int datanum = 12;
 int data[datanum];
@@ -55,7 +56,13 @@ void setup()
   SendRadio.setPALevel(RF24_PA_MAX);   //Max to provide maximum range
   SendRadio.setDataRate(RF24_1MBPS) ;  //experiment with this to try get more range (lower = more range but less speed)
   SendRadio.stopListening(); //Stop Receiving and start transminitng
-
+  lcd.init();                      // initialize the lcd
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print("Controller");
+  delay(1000);
+  lcd.clear();
+  lcd.setCursor(0,0);
 }
 
 void loop()
@@ -98,4 +105,23 @@ void loop()
   Serial.print("  ");
   Serial.print(data[11]);
   Serial.println("  ");
+  // menu code
+  if (data[5] == 1)
+  {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Drive");
+  }
+  else
+  {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Menu");
+    lcd.setCursor(1,0);
+    lcd.print("Motors");
+    lcd.setCursor(2,0);
+    lcd.print("Laser");
+    lcd.setCursor(3,0);
+
+  }
 }
