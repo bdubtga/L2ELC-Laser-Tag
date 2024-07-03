@@ -1,6 +1,6 @@
-//   ________  _______   ________         ___  ___          ___       __   ________  ___       ___       ___  ________      
+//   ________  _______   ________         ___  ___          ___       __   ________  ___       ___       ___  ________
 //  |\   __  \|\  ___ \ |\   ___  \      |\  \|\  \        |\  \     |\  \|\   __  \|\  \     |\  \     |\  \|\   ____\     
-//  \ \  \|\ /\ \   __/|\ \  \\ \  \     \ \  \ \  \       \ \  \    \ \  \ \  \|\  \ \  \    \ \  \    \ \  \ \  \___|_    
+//  \ \  \|\ /\ \   __/|\ \  \\ \  \     \ \  \ \  \       \ \  \    \ \  \ \  \|\  \ \  \    \ \  \    \ \  \ \  \___|_
 //   \ \   __  \ \  \_|/_\ \  \\ \  \  __ \ \  \ \  \       \ \  \  __\ \  \ \   __  \ \  \    \ \  \    \ \  \ \_____  \   
 //    \ \  \|\  \ \  \_|\ \ \  \\ \  \|\  \\_\  \ \  \       \ \  \|\__\_\  \ \  \ \  \ \  \____\ \  \____\ \  \|____|\  \  
 //     \ \_______\ \_______\ \__\\ \__\ \________\ \__\       \ \____________\ \__\ \__\ \_______\ \_______\ \__\____\_\  \ 
@@ -16,38 +16,40 @@ int value;
 
 void WriteData()
 {
-  value = random(255);
-  SendRadio.openWritingPipe(0xF0F0F0F066);//Sends data on this 40-bit address
-  SendRadio.write(&value, sizeof(value));
-  Serial.print("WriteData");
-  Serial.print(".........");
-  Serial.println(value);
+    value = random(255);
+    SendRadio.openWritingPipe(0xF0F0F0F066); // Sends data on this 40-bit address
+    SendRadio.write(&value, sizeof(value));
+    Serial.print("WriteData");
+    Serial.print(".........");
+    Serial.println(value);
 }
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  printf_begin();
-  Serial.println(F("LGT RF-NANO v2.0 Send Test"));
+void setup()
+{
+    // put your setup code here, to run once:
+    Serial.begin(115200);
+    printf_begin();
+    Serial.println(F("LGT RF-NANO v2.0 Send Test"));
 
-  //
-  // Setup and configure rf radio
-  //
-  // Get into standby mode
+    //
+    // Setup and configure rf radio
+    //
+    // Get into standby mode
 
-  SendRadio.begin();
-  SendRadio.setAddressWidth(5);
-  SendRadio.openWritingPipe(0xF0F0F0F066LL);
-  SendRadio.setChannel(115);           //115 band above WIFI signals
-  SendRadio.setPALevel(RF24_PA_MAX);   //MIN power low rage
-  SendRadio.setDataRate(RF24_1MBPS) ;  //Minimum speed
-  SendRadio.stopListening(); //Stop Receiving and start transminitng
-  Serial.print("Send Setup Initialized");
-  SendRadio.printDetails();
-  delay(500);
+    SendRadio.begin();
+    SendRadio.setAddressWidth(5);
+    SendRadio.openWritingPipe(0xF0F0F0F066LL);
+    SendRadio.setChannel(115);         // 115 band above WIFI signals
+    SendRadio.setPALevel(RF24_PA_MAX); // MIN power low rage
+    SendRadio.setDataRate(RF24_1MBPS); // Minimum speed
+    SendRadio.stopListening();         // Stop Receiving and start transminitng
+    Serial.print("Send Setup Initialized");
+    SendRadio.printDetails();
+    delay(500);
 }
 
-void loop() {
-  WriteData();
-  delay(1000);
+void loop()
+{
+    WriteData();
+    delay(1000);
 }
